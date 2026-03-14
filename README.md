@@ -227,9 +227,6 @@ docker build -f apps/server/Dockerfile -t acme-api .
 |---|---|---|
 | `DATABASE_URL` | PostgreSQL connection string | `postgresql://postgres:password@localhost:5433/acme` |
 | `AUTH_SECRET` | Secret key for Better Auth (min 32 chars) | `openssl rand -base64 32` |
-| `AUTH_DISCORD_ID` | Discord OAuth client ID (optional) | — |
-| `AUTH_DISCORD_SECRET` | Discord OAuth client secret (optional) | — |
-| `AUTH_REDIRECT_PROXY_URL` | Auth redirect proxy URL (optional) | — |
 | `PORT` | Server port override (optional) | `3001` |
 
 ---
