@@ -1,6 +1,6 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 
 import { Button } from "@acme/ui/button";
@@ -13,6 +13,7 @@ import {
 } from "@acme/ui/field";
 import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
+
 import { authClient } from "~/auth/client";
 
 export const Route = createFileRoute("/login")({
@@ -45,12 +46,12 @@ function LoginPage() {
         });
 
         if (res.error) {
-          toast.error(res.error.message || "Failed to login");
+          toast.error(res.error.message ?? "Failed to login");
         } else {
           toast.success("Successfully logged in");
           await navigate({ to: "/" });
         }
-      } catch (error) {
+      } catch {
         toast.error("An unexpected error occurred");
       } finally {
         setIsSubmitting(false);
@@ -60,7 +61,7 @@ function LoginPage() {
 
   return (
     <main className="container flex h-screen items-center justify-center">
-      <div className="w-full max-w-md rounded-xl border bg-card p-8 shadow-sm">
+      <div className="bg-card w-full max-w-md rounded-xl border p-8 shadow-sm">
         <h1 className="mb-6 text-2xl font-bold">Sign In</h1>
         <form
           onSubmit={(e) => {
@@ -74,7 +75,11 @@ function LoginPage() {
             <form.Field
               name="email"
               children={(field) => (
-                <Field data-invalid={field.state.meta.isTouched && !field.state.meta.isValid}>
+                <Field
+                  data-invalid={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   <FieldContent>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
                   </FieldContent>
@@ -96,7 +101,11 @@ function LoginPage() {
             <form.Field
               name="password"
               children={(field) => (
-                <Field data-invalid={field.state.meta.isTouched && !field.state.meta.isValid}>
+                <Field
+                  data-invalid={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   <FieldContent>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                   </FieldContent>
@@ -120,9 +129,13 @@ function LoginPage() {
             {isSubmitting ? "Signing in..." : "Sign In"}
           </Button>
 
-          <p className="mt-4 text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-center text-sm">
             Don't have an account?{" "}
-            <Button variant="link" className="p-0 h-auto" onClick={() => navigate({ to: "/register" })}>
+            <Button
+              variant="link"
+              className="h-auto p-0"
+              onClick={() => navigate({ to: "/register" })}
+            >
               Create one
             </Button>
           </p>

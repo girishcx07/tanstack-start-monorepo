@@ -4,12 +4,11 @@ import {
   createTRPCClient,
   httpBatchStreamLink,
   loggerLink,
-  unstable_localLink,
 } from "@trpc/client";
 import { createTRPCContext } from "@trpc/tanstack-react-query";
 import SuperJSON from "superjson";
 
-import * as Api from "@acme/api";
+import type * as Api from "@acme/api";
 
 import { env } from "~/env";
 import { getBaseUrl } from "~/lib/url";
@@ -22,7 +21,7 @@ export const makeTRPCClient = createIsomorphicFn()
           transformer: SuperJSON,
           url: getBaseUrl() + "/api/trpc",
           headers() {
-            const headers = new Headers(getRequestHeaders());
+            const headers = new Headers(getRequestHeaders() as HeadersInit);
             headers.set("x-trpc-source", "tanstack-start-server");
             return headers;
           },

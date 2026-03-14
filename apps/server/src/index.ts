@@ -1,9 +1,10 @@
-import { appRouter, createTRPCContext } from "@acme/api";
-import { initAuth } from "@acme/auth";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+
+import { appRouter, createTRPCContext } from "@acme/api";
+import { initAuth } from "@acme/auth";
 
 import { env } from "./env";
 
@@ -47,7 +48,8 @@ app.use("/api/trpc/*", async (c) => {
     endpoint: "/api/trpc",
     req: c.req.raw,
     router: appRouter,
-    createContext: () => createTRPCContext({ headers: new Headers(c.req.raw.headers), auth }),
+    createContext: () =>
+      createTRPCContext({ headers: new Headers(c.req.raw.headers), auth }),
   });
   return res;
 });

@@ -1,4 +1,5 @@
 import { reactStartCookies } from "better-auth/react-start";
+
 import { initAuth } from "@acme/auth";
 
 import { env } from "~/env";
