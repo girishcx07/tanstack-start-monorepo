@@ -49,7 +49,7 @@ function LoginPage() {
           toast.error(res.error.message ?? "Failed to login");
         } else {
           toast.success("Successfully logged in");
-          await navigate({ to: "/" });
+          await navigate({ to: "/dashboard" });
         }
       } catch {
         toast.error("An unexpected error occurred");
