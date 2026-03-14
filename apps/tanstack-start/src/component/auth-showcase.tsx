@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 
 import { Button } from "@acme/ui/button";
 
-import { authClient } from "~/auth/client";
+import { authClient } from "@/auth/client";
 
 export function AuthShowcase() {
   const { data: session } = authClient.useSession();
@@ -11,10 +11,10 @@ export function AuthShowcase() {
   if (!session) {
     return (
       <div className="flex gap-4">
-        <Button size="lg" asChild>
+        <Button>
           <Link to="/login">Sign In</Link>
         </Button>
-        <Button size="lg" variant="outline" asChild>
+        <Button variant="outline">
           <Link to="/register">Create Account</Link>
         </Button>
       </div>
@@ -28,7 +28,6 @@ export function AuthShowcase() {
       </p>
 
       <Button
-        size="lg"
         onClick={async () => {
           await authClient.signOut();
           await navigate({ href: "/", replace: true });

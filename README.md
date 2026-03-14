@@ -6,17 +6,17 @@ A full-stack monorepo built with **TanStack Start** (SSR/web), **Hono** (API ser
 
 ## 📦 Tech Stack
 
-| Layer | Technology |
-|---|---|
+| Layer              | Technology                                              |
+| ------------------ | ------------------------------------------------------- |
 | **Frontend / SSR** | [TanStack Start](https://tanstack.com/start) + React 19 |
-| **API Server** | [Hono](https://hono.dev) + tRPC |
-| **Auth** | [Better Auth](https://www.better-auth.com) |
-| **Database ORM** | [Drizzle ORM](https://orm.drizzle.team) |
-| **Database** | PostgreSQL 16 |
-| **Styling** | Tailwind CSS v4 |
-| **Monorepo** | [Turborepo](https://turbo.build) + pnpm workspaces |
-| **Reverse Proxy** | Nginx (Docker only) |
-| **Runtime** | Node.js 22 |
+| **API Server**     | [Hono](https://hono.dev) + tRPC                         |
+| **Auth**           | [Better Auth](https://www.better-auth.com)              |
+| **Database ORM**   | [Drizzle ORM](https://orm.drizzle.team)                 |
+| **Database**       | PostgreSQL 16                                           |
+| **Styling**        | Tailwind CSS v4                                         |
+| **Monorepo**       | [Turborepo](https://turbo.build) + pnpm workspaces      |
+| **Reverse Proxy**  | Nginx (Docker only)                                     |
+| **Runtime**        | Node.js 22                                              |
 
 ---
 
@@ -68,19 +68,19 @@ t3-repo-v4/
 
 ## 🌐 Ports
 
-| Service | Port | Description |
-|---|---|---|
-| **Web (TanStack Start)** | `3000` | SSR frontend app |
-| **API (Hono)** | `3001` | tRPC + REST API |
-| **PostgreSQL** | `5433` | Database (local Docker) |
-| **Nginx** | `80` | Reverse proxy (Docker Compose only) |
+| Service                  | Port   | Description                         |
+| ------------------------ | ------ | ----------------------------------- |
+| **Web (TanStack Start)** | `3000` | SSR frontend app                    |
+| **API (Hono)**           | `3001` | tRPC + REST API                     |
+| **PostgreSQL**           | `5433` | Database (local Docker)             |
+| **Nginx**                | `80`   | Reverse proxy (Docker Compose only) |
 
 ### Nginx Routing (Docker Compose)
 
-| Path | Target |
-|---|---|
-| `/api/*` | Hono API server (`localhost:3001`) |
-| `/*` | TanStack Start web app (`localhost:3000`) |
+| Path     | Target                                    |
+| -------- | ----------------------------------------- |
+| `/api/*` | Hono API server (`localhost:3001`)        |
+| `/*`     | TanStack Start web app (`localhost:3000`) |
 
 ---
 
@@ -143,26 +143,26 @@ pnpm dev
 
 This runs all packages in watch mode via Turborepo. The browser will open automatically at **http://localhost:3000**.
 
-| What starts | Command internally |
-|---|---|
-| `@acme/tanstack-start` | `vite dev` (port 3000) |
-| `@acme/server` | `tsx watch src/server.ts` (port 3001) |
-| `@acme/api`, `@acme/db`, etc. | `tsc --watch` |
+| What starts                   | Command internally                    |
+| ----------------------------- | ------------------------------------- |
+| `@acme/tanstack-start`        | `vite dev` (port 3000)                |
+| `@acme/server`                | `tsx watch src/server.ts` (port 3001) |
+| `@acme/api`, `@acme/db`, etc. | `tsc --watch`                         |
 
 ---
 
 ## 🔧 Available Commands
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Start all packages in development mode |
-| `pnpm build` | Build all packages for production |
-| `pnpm lint` | Lint all packages with ESLint |
-| `pnpm typecheck` | Type-check all packages |
-| `pnpm format` | Check formatting with Prettier |
-| `pnpm format:fix` | Auto-fix formatting |
-| `pnpm db:push` | Push Drizzle schema to the database |
-| `pnpm db:studio` | Open Drizzle Studio (database UI) |
+| Command           | Description                            |
+| ----------------- | -------------------------------------- |
+| `pnpm dev`        | Start all packages in development mode |
+| `pnpm build`      | Build all packages for production      |
+| `pnpm lint`       | Lint all packages with ESLint          |
+| `pnpm typecheck`  | Type-check all packages                |
+| `pnpm format`     | Check formatting with Prettier         |
+| `pnpm format:fix` | Auto-fix formatting                    |
+| `pnpm db:push`    | Push Drizzle schema to the database    |
+| `pnpm db:studio`  | Open Drizzle Studio (database UI)      |
 
 ---
 
@@ -182,6 +182,7 @@ docker compose up --build
 ```
 
 This starts:
+
 - **Nginx** on `http://localhost:80` (reverse proxy)
 - **TanStack Start** web app on internal port `3000`
 - **Hono API** server on internal port `3001`
@@ -204,10 +205,10 @@ docker compose down
 
 Both apps use **multi-stage Docker builds** powered by Turborepo's `prune` feature for minimal image sizes:
 
-| App | Dockerfile | Exposed Port |
-|---|---|---|
-| TanStack Start | `apps/tanstack-start/Dockerfile` | `3000` |
-| Hono API Server | `apps/server/Dockerfile` | `3001` |
+| App             | Dockerfile                       | Exposed Port |
+| --------------- | -------------------------------- | ------------ |
+| TanStack Start  | `apps/tanstack-start/Dockerfile` | `3000`       |
+| Hono API Server | `apps/server/Dockerfile`         | `3001`       |
 
 Build individual images:
 
@@ -223,11 +224,11 @@ docker build -f apps/server/Dockerfile -t acme-api .
 
 ## 🔐 Environment Variables
 
-| Variable | Description | Example |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL connection string | `postgresql://postgres:password@localhost:5433/acme` |
-| `AUTH_SECRET` | Secret key for Better Auth (min 32 chars) | `openssl rand -base64 32` |
-| `PORT` | Server port override (optional) | `3001` |
+| Variable       | Description                               | Example                                              |
+| -------------- | ----------------------------------------- | ---------------------------------------------------- |
+| `DATABASE_URL` | PostgreSQL connection string              | `postgresql://postgres:password@localhost:5433/acme` |
+| `AUTH_SECRET`  | Secret key for Better Auth (min 32 chars) | `openssl rand -base64 32`                            |
+| `PORT`         | Server port override (optional)           | `3001`                                               |
 
 ---
 
@@ -252,6 +253,7 @@ Nginx :80  (Docker only)
 ```
 
 In **local development** (no Docker):
+
 - **http://localhost:3000** → TanStack Start (Vite dev server)
 - **http://localhost:3001** → Hono API (tsx watch)
 - **http://localhost:5433** → PostgreSQL (Docker container)

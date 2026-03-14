@@ -14,7 +14,7 @@ import {
 import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
 
-import { authClient } from "~/auth/client";
+import { authClient } from "@/auth/client";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,

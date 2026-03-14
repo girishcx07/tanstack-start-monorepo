@@ -6,14 +6,17 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: true,
+  },
   server: {
     port: 3000,
     open: true,
   },
   plugins: [
-    tsConfigPaths({
-      projects: ["./tsconfig.json"],
-    }),
+    // tsConfigPaths({
+    //   projects: ["./tsconfig.json", "../../packages/ui/tsconfig.json"],
+    // }),
     nitro(),
     tanstackStart(),
     viteReact(),

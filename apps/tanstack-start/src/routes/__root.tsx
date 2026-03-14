@@ -14,7 +14,7 @@ import type { AppRouter } from "@acme/api";
 import { ThemeProvider, ThemeToggle } from "@acme/ui/theme";
 import { Toaster } from "@acme/ui/toast";
 
-import appCss from "~/styles.css?url";
+import appCss from "@/styles.css?url";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;

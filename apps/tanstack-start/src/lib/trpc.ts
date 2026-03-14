@@ -10,8 +10,8 @@ import SuperJSON from "superjson";
 
 import type * as Api from "@acme/api";
 
-import { env } from "~/env";
-import { getBaseUrl } from "~/lib/url";
+import { env } from "@/env";
+import { getBaseUrl } from "@/lib/url";
 
 export const makeTRPCClient = createIsomorphicFn()
   .server(() => {

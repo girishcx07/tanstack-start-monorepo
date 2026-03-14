@@ -45,12 +45,7 @@
       "interactive": true
     }
   },
-  "globalEnv": [
-    "DATABASE_URL",
-    "POSTGRES_URL",
-    "AUTH_SECRET",
-    "PORT"
-  ],
+  "globalEnv": ["DATABASE_URL", "POSTGRES_URL", "AUTH_SECRET", "PORT"],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",

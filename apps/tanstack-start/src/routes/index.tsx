@@ -21,8 +21,8 @@ import {
 import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
 
-import { AuthShowcase } from "~/component/auth-showcase";
-import { useTRPC } from "~/lib/trpc";
+import { AuthShowcase } from "@/component/auth-showcase";
+import { useTRPC } from "@/lib/trpc";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => {
