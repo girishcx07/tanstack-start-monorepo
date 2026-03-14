@@ -1,0 +1,44 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+      - api
+    networks:
+      - t3-network
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/tanstack-start/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=http://localhost/api
+      - PORT=3000
+    env_file:
+      - .env
+    networks:
+      - t3-network
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PUBLIC_WEB_URL=http://localhost
+      - PUBLIC_SERVER_URL=http://localhost
+      - PORT=3001
+      - HOST=0.0.0.0
+    env_file:
+      - .env
+    networks:
+      - t3-network
+
+networks:
+  t3-network:
+    driver: bridge

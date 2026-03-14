@@ -17,7 +17,7 @@ export const env = createEnv({
    * This way you can ensure the app isn't built with invalid env vars.
    */
   server: {
-    POSTGRES_URL: z.url(),
+    API_URL: z.string().url().default("http://localhost:3001"),
   },
 
   /**

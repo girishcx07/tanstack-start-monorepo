@@ -11,7 +11,6 @@ import SuperJSON from "superjson";
 
 import * as Api from "@acme/api";
 
-import { auth } from "~/auth/server";
 import { env } from "~/env";
 import { getBaseUrl } from "~/lib/url";
 
@@ -19,13 +18,13 @@ export const makeTRPCClient = createIsomorphicFn()
   .server(() => {
     return createTRPCClient<Api.AppRouter>({
       links: [
-        unstable_localLink({
-          router: Api.appRouter,
+        httpBatchStreamLink({
           transformer: SuperJSON,
-          createContext: () => {
+          url: getBaseUrl() + "/api/trpc",
+          headers() {
             const headers = new Headers(getRequestHeaders());
             headers.set("x-trpc-source", "tanstack-start-server");
-            return Api.createTRPCContext({ auth, headers });
+            return headers;
           },
         }),
       ],

@@ -4,6 +4,9 @@ export function getBaseUrl() {
   if (typeof window !== "undefined") {
     return window.location.origin;
   }
+  if (env.API_URL) {
+    return env.API_URL;
+  }
   if (env.VERCEL_ENV === "production") {
     return `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
   }

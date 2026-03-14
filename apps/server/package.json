@@ -1,37 +1,36 @@
 {
-  "name": "@acme/api",
+  "name": "@acme/server",
   "private": true,
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    }
-  },
-  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsc",
+    "dev": "pnpm with-env tsx watch src/server.ts",
+    "start": "NODE_ENV=production pnpm with-env node dist/server.js",
+    "with-env": "dotenv -e ../../.env --",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@acme/api": "workspace:*",
     "@acme/auth": "workspace:*",
     "@acme/db": "workspace:*",
-    "@acme/validators": "workspace:*",
+    "@hono/node-server": "^1.13.8",
+    "@t3-oss/env-core": "^0.13.10",
     "@trpc/server": "catalog:",
-    "superjson": "2.2.6",
+    "hono": "^4.7.2",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/pg": "^8.11.11",
+    "@types/node": "catalog:",
+    "dotenv-cli": "^11.0.0",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "tsx": "^4.19.3",
     "typescript": "catalog:"
   },
   "prettier": "@acme/prettier-config"

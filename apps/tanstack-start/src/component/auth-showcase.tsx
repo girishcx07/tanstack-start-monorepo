@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 import { Button } from "@acme/ui/button";
 
@@ -10,21 +10,14 @@ export function AuthShowcase() {
 
   if (!session) {
     return (
-      <Button
-        size="lg"
-        onClick={async () => {
-          const res = await authClient.signIn.social({
-            provider: "discord",
-            callbackURL: "/",
-          });
-          if (!res.data?.url) {
-            throw new Error("No URL returned from signInSocial");
-          }
-          await navigate({ href: res.data.url, replace: true });
-        }}
-      >
-        Sign in with Discord
-      </Button>
+      <div className="flex gap-4">
+        <Button size="lg" asChild>
+          <Link to="/login">Sign In</Link>
+        </Button>
+        <Button size="lg" variant="outline" asChild>
+          <Link to="/register">Create Account</Link>
+        </Button>
+      </div>
     );
   }
 
