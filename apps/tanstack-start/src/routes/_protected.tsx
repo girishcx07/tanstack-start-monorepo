@@ -7,15 +7,11 @@ export const Route = createFileRoute("/_protected")({
     const session = await getSession();
 
     if (!session) {
-      const error = new Error("Redirecting to login");
-      Object.assign(
-        error,
-        redirect({
-          to: "/login",
-          search: { redirect: location.href },
-        }),
-      );
-      throw error;
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({
+        to: "/login",
+        search: { redirect: location.href },
+      });
     }
 
     return { user: session.user };

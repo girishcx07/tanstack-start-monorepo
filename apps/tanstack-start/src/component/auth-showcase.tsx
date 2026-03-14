@@ -35,6 +35,9 @@ export function AuthShowcase() {
       >
         Sign out
       </Button>
+      <Button>
+        <Link to="/dashboard">Dashboard</Link>
+      </Button>
     </div>
   );
 }

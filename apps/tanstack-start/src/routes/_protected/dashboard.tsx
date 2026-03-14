@@ -30,9 +30,8 @@ export const Route = createFileRoute("/_protected/dashboard")({
     const session = await getSession();
 
     if (!session) {
-      const error = new Error("Redirecting to login");
-      Object.assign(error, redirect({ to: "/login" }));
-      throw error;
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({ to: "/login" });
     }
 
     return { user: session.user };
