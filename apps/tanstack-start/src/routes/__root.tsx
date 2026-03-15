@@ -24,6 +24,7 @@ export const Route = createRootRouteWithContext<{
     links: [{ rel: "stylesheet", href: appCss }],
   }),
   component: RootComponent,
+  notFoundComponent: () => <p>Not Found</p>,
 });
 
 function RootComponent() {
@@ -36,12 +37,12 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <HeadContent />
-        </head>
-        <body className="bg-background text-foreground min-h-screen font-sans antialiased">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body className="bg-background text-foreground min-h-screen font-sans antialiased">
+        <ThemeProvider>
           {children}
           <div className="absolute right-4 bottom-12">
             <ThemeToggle />
@@ -49,8 +50,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <Toaster />
           <TanStackRouterDevtools position="bottom-right" />
           <Scripts />
-        </body>
-      </html>
-    </ThemeProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
