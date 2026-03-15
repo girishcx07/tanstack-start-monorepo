@@ -37,7 +37,7 @@ function RegisterPage() {
       password: "",
     },
     validators: {
-      onChange: RegisterSchema,
+      onSubmit: RegisterSchema,
     },
     onSubmit: async ({ value }) => {
       setIsSubmitting(true);

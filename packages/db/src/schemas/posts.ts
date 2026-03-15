@@ -14,8 +14,11 @@ export const Post = pgTable("post", (t) => ({
 }));
 
 export const CreatePostSchema = createInsertSchema(Post, {
-  title: z.string().max(256),
-  content: z.string().max(256),
+  title: z.string().min(5, "Title is too short").max(256, "Title is too long"),
+  content: z
+    .string()
+    .min(10, "Content is too short")
+    .max(256, "Content is too long"),
 }).omit({
   id: true,
   createdAt: true,

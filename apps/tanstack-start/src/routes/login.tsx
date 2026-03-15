@@ -35,7 +35,7 @@ function LoginPage() {
       password: "",
     },
     validators: {
-      onChange: LoginSchema,
+      onSubmit: LoginSchema,
     },
     onSubmit: async ({ value }) => {
       setIsSubmitting(true);
