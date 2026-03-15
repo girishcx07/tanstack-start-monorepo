@@ -3,15 +3,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/lib/utils.ts",
-    "./button": "./src/components/button.tsx",
-    "./dropdown-menu": "./src/components/dropdown-menu.tsx",
-    "./field": "./src/components/field.tsx",
-    "./input": "./src/components/input.tsx",
-    "./label": "./src/components/label.tsx",
-    "./separator": "./src/components/separator.tsx",
-    "./theme": "./src/components/theme.tsx",
-    "./toast": "./src/components/toast.tsx"
+    "./lib/*": "./src/lib/*.ts",
+    "./components/*": "./src/components/*.tsx"
   },
   "license": "MIT",
   "scripts": {

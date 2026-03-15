@@ -2,16 +2,16 @@ import { useForm } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CreatePostSchema } from "@acme/db/schema";
-import { Button } from "@acme/ui/button";
+import { Button } from "@acme/ui/components/button";
 import {
   Field,
   FieldContent,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@acme/ui/field";
-import { Input } from "@acme/ui/input";
-import { toast } from "@acme/ui/toast";
+} from "@acme/ui/components/field";
+import { Input } from "@acme/ui/components/input";
+import { toast } from "@acme/ui/components/toast";
 
 import { useTRPC } from "@/lib/trpc";
 

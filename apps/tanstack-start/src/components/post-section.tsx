@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-query";
 
 import type { RouterOutputs } from "@acme/api";
-import { Button } from "@acme/ui/button";
+import { Button } from "@acme/ui/components/button";
 
 import { useTRPC } from "@/lib/trpc";
 

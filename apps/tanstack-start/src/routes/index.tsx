@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Button } from "@acme/ui/button";
+import { Button } from "@acme/ui/components/button";
 
 import { FeatureCard } from "@/components/feature-card";
 

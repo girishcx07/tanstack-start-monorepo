@@ -3,16 +3,16 @@ import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 
-import { Button } from "@acme/ui/button";
+import { Button } from "@acme/ui/components/button";
 import {
   Field,
   FieldContent,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@acme/ui/field";
-import { Input } from "@acme/ui/input";
-import { toast } from "@acme/ui/toast";
+} from "@acme/ui/components/field";
+import { Input } from "@acme/ui/components/input";
+import { toast } from "@acme/ui/components/toast";
 
 import { authClient } from "@/auth/client";
 
