@@ -1,8 +1,7 @@
 {
-  "extends": "@acme/tsconfig/compiled-package.json",
-  "include": ["src", "drizzle.config.ts"],
-  "exclude": ["node_modules"],
-  "compilerOptions": {
-    "types": ["node"]
-  }
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.package.json" },
+    { "path": "./tsconfig.drizzlekit.json" }
+  ]
 }

@@ -2,12 +2,30 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "80:80"
+      - "3000:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - web
-      - api
+      web:
+        condition: service_started
+      api:
+        condition: service_started
+    networks:
+      - t3-network
+
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=acme
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d acme"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - t3-network
 
@@ -17,10 +35,13 @@ services:
       dockerfile: apps/tanstack-start/Dockerfile
     environment:
       - NODE_ENV=production
-      - VITE_API_URL=http://localhost/api
+      - DATABASE_URL=postgresql://postgres:password@db:5432/acme
+      - VITE_API_URL=http://localhost:3000/api
+      - AUTH_SECRET=supersecret
       - PORT=3000
-    env_file:
-      - .env
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - t3-network
 
@@ -30,12 +51,15 @@ services:
       dockerfile: apps/server/Dockerfile
     environment:
       - NODE_ENV=production
-      - PUBLIC_WEB_URL=http://localhost
-      - PUBLIC_SERVER_URL=http://localhost
+      - DATABASE_URL=postgresql://postgres:password@db:5432/acme
+      - PUBLIC_WEB_URL=http://localhost:3000
+      - PUBLIC_SERVER_URL=http://localhost:3000
+      - AUTH_SECRET=supersecret
       - PORT=3001
       - HOST=0.0.0.0
-    env_file:
-      - .env
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - t3-network
 

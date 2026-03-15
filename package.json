@@ -21,7 +21,11 @@
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
-    "ui-add": "turbo run ui-add"
+    "ui-add": "turbo run ui-add",
+    "build:prod": "pnpm -F @acme/db container:build && pnpm -F @acme/server container:build && pnpm -F @acme/tanstack-start container:build",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",

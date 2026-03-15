@@ -73,7 +73,7 @@ t3-repo-v4/
 | **Web (TanStack Start)** | `3000` | SSR frontend app                    |
 | **API (Hono)**           | `3001` | tRPC + REST API                     |
 | **PostgreSQL**           | `5433` | Database (local Docker)             |
-| **Nginx**                | `80`   | Reverse proxy (Docker Compose only) |
+| **Nginx**                | `3000` | Reverse proxy (Docker Compose only) |
 
 ### Nginx Routing (Docker Compose)
 
@@ -124,10 +124,10 @@ AUTH_SECRET="your_secret_here"
 ### 4. Start the local PostgreSQL database
 
 ```bash
-docker compose -f packages/db/docker-compose.yml up -d
+pnpm docker:up db
 ```
 
-This starts a PostgreSQL 16 container on **port 5433**.
+This starts a PostgreSQL container on **port 5433**.
 
 ### 5. Push database schema
 
@@ -153,41 +153,44 @@ This runs all packages in watch mode via Turborepo. The browser will open automa
 
 ## 🔧 Available Commands
 
-| Command           | Description                            |
-| ----------------- | -------------------------------------- |
-| `pnpm dev`        | Start all packages in development mode |
-| `pnpm build`      | Build all packages for production      |
-| `pnpm lint`       | Lint all packages with ESLint          |
-| `pnpm typecheck`  | Type-check all packages                |
-| `pnpm format`     | Check formatting with Prettier         |
-| `pnpm format:fix` | Auto-fix formatting                    |
-| `pnpm db:push`    | Push Drizzle schema to the database    |
-| `pnpm db:studio`  | Open Drizzle Studio (database UI)      |
+| Command             | Description                            |
+| ------------------- | -------------------------------------- |
+| `pnpm dev`          | Start all packages in development mode |
+| `pnpm build:prod`   | Build all packages for production      |
+| `pnpm docker:build` | Build Docker images from artifacts     |
+| `pnpm docker:up`    | Start the production-like stack        |
+| `pnpm docker:down`  | Stop the production-like stack         |
+| `pnpm lint`         | Lint all packages with ESLint          |
+| `pnpm typecheck`    | Type-check all packages                |
+| `pnpm format`       | Check formatting with Prettier         |
+| `pnpm format:fix`   | Auto-fix formatting                    |
+| `pnpm db:push`      | Push Drizzle schema to the database    |
+| `pnpm db:studio`    | Open Drizzle Studio (database UI)      |
 
 ---
 
 ## 🐳 Docker
 
-The project ships with Docker support for both apps and a full-stack Docker Compose setup with Nginx as a reverse proxy.
+The project ships with Docker support for a full-stack production-like setup with Nginx as a reverse proxy.
 
 ### Start full stack with Docker Compose
 
 ```bash
-# Copy and configure environment
-cp .env.example .env
-# Edit .env with your production values
+# 1. Build host-side artifacts
+pnpm build:prod
 
-# Build and start all containers
-docker compose up --build
+# 2. Build and start containers
+pnpm docker:build
+pnpm docker:up
 ```
 
 This starts:
 
-- **Nginx** on `http://localhost:80` (reverse proxy)
+- **Nginx** on `http://localhost:3000` (reverse proxy)
 - **TanStack Start** web app on internal port `3000`
 - **Hono API** server on internal port `3001`
 
-> Access the app at **http://localhost** (port 80 via Nginx)
+> Access the app at **http://localhost:3000**
 
 ### Start database only
 
@@ -238,7 +241,7 @@ docker build -f apps/server/Dockerfile -t acme-api .
 Browser
   │
   ▼
-Nginx :80  (Docker only)
+Nginx :3000 (Docker only)
   ├─ /api/* ──────────► Hono Server :3001
   │                          │
   │                     tRPC Router
